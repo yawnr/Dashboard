@@ -1,0 +1,14 @@
+<div>lots of fuckin companies yo</div>
+
+<form action="<%= companies_url %>" class="new_company_form" method="post">
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+  <input type="text" name="company[name]" placeholder="Company Name" />
+  <input type="text" name="company[ticker]" placeholder="Ticker Symbol" />
+
+  <input type="submit" />
+</form>
+
+<% @companies.each do |company| %>
+  <div><%= company.name %>: <%= company.ticker %></div>
+  <img src="<%= "http://chart.finance.yahoo.com/z?s=" + company.ticker + "&t=6m&q=l&l=on&z=s&p=m50,m200" %>"/>
+<% end %>
