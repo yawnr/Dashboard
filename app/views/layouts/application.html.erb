@@ -8,9 +8,16 @@
 </head>
 <body>
 
-Hello
+  <div class="errors">
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |error| %>
+        <%= error %>
+        <br/>
+      <% end %>
+    <% end %>
+    </div>
 
-<%= yield %>
+    <%= yield %>
 
 </body>
 </html>

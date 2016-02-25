@@ -8,7 +8,20 @@
   <input type="submit" />
 </form>
 
+<% tickers = [] %>
+<% @companies.each do |company| %>
+  <% tickers.push(company.ticker.upcase) %>
+<% end %>
+<% ticker_string = tickers.join(",") %>
+<% data_url = "http://query.yahooapis.com/v1/public/yql?q=select%20%2a%20from%20yahoo.finance.quotes%20where%20symbol%20in%20%28%22#{ticker_string}%22%29&env=store://datatables.org/alltableswithkeys" %>
+
+<% if @companies.length > 0 %>
+  <a href=<%= data_url %>>Data</a>
+<% end %>
+
 <% @companies.each do |company| %>
   <div><%= company.name %>: <%= company.ticker %></div>
-  <img src="<%= "http://chart.finance.yahoo.com/z?s=" + company.ticker + "&t=6m&q=l&l=on&z=s&p=m50,m200" %>"/>
+  <%= react_component("OneDayStockPrice") %>
+  <img src="<%= "http://chart.finance.yahoo.com/z?s=" + company.ticker.upcase + "&t=6m&q=l&l=on&z=s&p=m50,m200" %>"/>
+  <img src="<%= "http://ichart.finance.yahoo.com/b?s=" + company.ticker.upcase %>"/>
 <% end %>

@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def login(user)
     user.reset_token!
     session[:session_token] = user.session_token
-    redirect_to(companies_url)
+    redirect_to(root_url)
   end
 
   def logout

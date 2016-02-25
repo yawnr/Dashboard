@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
     if current_user
       company = current_user.companies.create!(company_params)
       @companies = current_user.companies
-      render 'index'
+      redirect_to(root_url) 
     else
       redirect_to(new_session_url)
     end
