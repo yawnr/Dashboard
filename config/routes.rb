@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'companies#index'
+  root 'users#show'
 
   resources :companies
   resources :users, only: [:new, :create, :show, :update]
