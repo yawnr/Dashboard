@@ -149,6 +149,15 @@
   width: 500px;
 }
 
+.filings-container a {
+  color: #54bae5;
+  transition: color 300ms;
+}
+
+.filings-container a:hover {
+  color: #60ccf9;
+}
+
 .company-ticker {
   font-size: 48px;
   font-weight: 600;
