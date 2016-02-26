@@ -9,18 +9,22 @@ var Company = React.createClass({
 
     return (
       <div key={co.id} className="company-container">
+      <div className="company-ticker" >{co.ticker}</div>
         <div className="company-name" >{co.name}</div>
-        <div className="company-ticker" >{co.ticker}</div>
         <div className="stock-detail-container">
           <table>
             <tbody>
               <tr>
+                <td>{"Change"}</td>
+                <td>{"% Change"}</td>
                 <td>{"Day's Low"}</td>
                 <td>{"Day's High"}</td>
                 <td>{"Market Cap"}</td>
                 <td>{"EBITDA"}</td>
               </tr>
               <tr>
+                <td>{co.quote.Change}</td>
+                <td>{co.quote.PercentChange}</td>
                 <td>{co.quote.DaysHigh}</td>
                 <td>{co.quote.DaysLow}</td>
                 <td>{co.quote.MarketCapitalization}</td>
@@ -30,7 +34,7 @@ var Company = React.createClass({
           </table>
         </div>
 
-        <div className="charts-container">
+        <div className="charts-container group">
           <img src={co.oneDayChart} className="image" onLoad={this.imageLoaded} />
           <img src={co.fiveDayChart} className="image" onLoad={this.imageLoaded} />
           <img src={co.oneMonthChart} className="image" onLoad={this.imageLoaded} />

@@ -97,7 +97,7 @@ var AllCompanies = React.createClass({
     var that = this;
     var toRender;
     var companyForm = (
-      <form className="new_company_form" onSubmit={this.addCompany}>
+      <form className="new-company-form group" onSubmit={this.addCompany}>
         <input type="text" ref="companyName" name="company[name]" placeholder="Company Name" />
         <input type="text" ref="companyTicker" name="company[ticker]" placeholder="Ticker Symbol" />
         <button>Add Company</button>
@@ -109,7 +109,7 @@ var AllCompanies = React.createClass({
                     {this.state.companies.map(function (company) {
                         return (<div key={company.name} className={"company " + company.name}>
                                   <Company key={company.id} company={company} />
-                                  <button onClick={that.deleteCompany.bind(null, company)} >Delete</button>
+                                  <button className="deleteCompany" onClick={that.deleteCompany.bind(null, company)} >Delete</button>
                                 </div>
                                 );
                       })
@@ -117,7 +117,7 @@ var AllCompanies = React.createClass({
                   </div>
                   );
     } else {
-      toRender = (<div>Add Some Companies</div>);
+      toRender = (<div className="add-some">Add Some Companies</div>);
     }
 
     setTimeout(function() {

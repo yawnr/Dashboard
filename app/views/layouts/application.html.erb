@@ -18,12 +18,12 @@
     </div>
 
     <% if current_user %>
-      <form action="<%= session_url %>" method="post">
+      <form class="sign-out-form group" action="<%= session_url %>" method="post">
         <input type="hidden" name="_method" value="delete">
 
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-        <button>Sign Out</button>
+        <button class="sign-out">Sign Out</button>
       </form>
     <% end %>
 

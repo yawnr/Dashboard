@@ -1,3 +1,12 @@
+.small-logo {
+  height: 60px;
+  display: block;
+  margin: auto;
+  padding: 10px 0 0 0;
+  opacity: 0;
+  transition: opacity 1000ms;
+}
+
 .image {
   opacity: 0;
   transition: opacity 2000ms;
@@ -14,4 +23,149 @@
 
 .image.loaded {
   opacity: .8;
+}
+
+#weather {
+  display: block;
+  text-align: center;
+  position: relative;
+}
+
+#weather > ul {
+  display: inline-block;
+  margin: auto;
+}
+
+#weather li {
+  float: left;
+  padding: 10px;
+}
+
+.js-geolocation {
+  margin: auto;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.welcome-back {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px;
+}
+
+.company-page {
+  margin-top: 10px;
+}
+
+.new-company-form {
+  width: 600px;
+  margin: auto;
+  display: block;
+}
+
+.new-company-form * {
+  width: 200px;
+  display: inline-block;;
+  float: left;
+  margin: auto;
+}
+
+.new-company-form input {
+  background: #f3f3f3;
+  text-align: center;
+  padding: 5px 0px;
+}
+
+.new-company-form input:focus {
+  outline: none;
+}
+
+.new-company-form button {
+  background: #54bae5;
+  cursor: pointer;
+  color: #fff;
+  padding: 5px 0px;
+  text-align: center;
+  transition: background 300ms;
+}
+
+.new-company-form button:hover {
+  background: #60ccf9;
+}
+
+.add-some {
+  padding: 100px;
+  font-size: 72px;
+  opacity: .5;
+}
+
+.company {
+  margin: 20px auto;
+}
+
+.company img {
+  width: 33.3%;
+  display: block;
+  float: left;
+}
+
+.charts-container {
+  width: 90%;
+  margin: auto;
+}
+
+.stock-detail-container {
+  margin: 20px 0px 30px 0px;
+}
+
+.stock-detail-container table {
+  margin: auto;
+}
+
+.stock-detail-container td {
+  background: #f3f3f3;
+  border: 1px solid #fff;
+  width: 100px;
+  padding: 5px 0px;
+}
+
+
+
+.filings-container {
+  margin: 20px 0px 30px 0px;
+}
+
+.filings-container table {
+  margin: auto;
+}
+
+.filings-container td {
+  background: #f3f3f3;
+  width: 100px;
+  padding: 5px 0px;
+}
+
+.filings-container td:nth-child(2n+2) {
+  width: 500px;
+}
+
+.company-ticker {
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.company-name {
+  font-size: 28px;
+}
+
+.deleteCompany {
+  background: #a52a2a;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: background 300ms;
+  color: #fff;
+}
+
+.deleteCompany:hover {
+  background: darkred;
 }

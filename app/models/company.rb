@@ -26,16 +26,6 @@ class Company < ActiveRecord::Base
       end
       company_hash['filings'] = filings_data
 
-      # company_hash['sec_filings'] = SecQuery::Entity.find(company.ticker.upcase, :relationships=> true, :transactions=> {:start=> 0, :count=>20, :limit=> 20}, :filings=>{:start=> 0, :count=> 20, :limit=> 20})
-      # sec_url = "http://www.sec.gov/cgi-bin/browse-edgar?CIK=#{company.ticker.downcase}&owner=exclude&action=getcompany"
-      # sec_data = Nokogiri::HTML(open(sec_url))
-      # data_url = "http://query.yahooapis.com/v1/public/yql?q=select%20%2a%20from%20yahoo.finance.quotes%20where%20symbol%20in%20%28%22#{company.ticker.upcase}%22%29&env=store://datatables.org/alltableswithkeys"
-      # financial_data = Nokogiri::HTML(open(data_url))
-      # company_hash['daysHigh'] = financial_data.css('dayshigh')[0].text
-      # company_hash['daysLow'] = financial_data.css('dayslow')[0].text
-      # company_hash['marketCap'] = financial_data.css('marketcapitalization')[0].text
-      # company_hash['EBITDA'] = financial_data.css('ebitda')[0].text
-
       json_response.push(company_hash)
     end
 

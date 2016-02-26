@@ -1,17 +1,21 @@
-<div class="create-page">
+<div class="login-page">
 
-    <div class="create-form">
-
-      <form action="<%= users_url %>" method="POST">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
-        <input type="text" class="email-create" name="user[email]" placeholder="email" value="<%=@user.email %>">
-        <input type="password" class="password-create" placeholder="password" name="user[password]">
-        <button class="create-button">Create Account</button>
-
-        <a href="<%= new_session_url %>" class="login-link">Log In</a>
-      </form>
-
-    </div>
-
+  <div class="logo-container">
+    <img class="logo" src="<%= image_path('logo2.png') %>" />
   </div>
+
+  <div class="login-form">
+
+    <form class="group" action="<%= users_url %>" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+      <input type="text" class="username-login" name="user[email]" placeholder="Email" value="<%=@user.email %>">
+      <input type="password" class="password-login" placeholder="Password" name="user[password]">
+      <button class="login-button">Create Account</button>
+
+    </form>
+
+    <a href="<%= new_session_url %>" class="create-account-link">Log In</a>
+  </div>
+
+</div>
