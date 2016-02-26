@@ -1,8 +1,17 @@
 .image {
   opacity: 0;
-  transition: opacity 2s;
+  transition: opacity 2000ms;
+}
+
+.company-page, .company {
+  opacity: 0;
+  transition: opacity 1000ms;
 }
 
 .loaded {
+  opacity: 1;
+}
+
+.image.loaded {
   opacity: .8;
 }

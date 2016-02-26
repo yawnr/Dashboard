@@ -39,6 +39,9 @@ var AllCompanies = React.createClass({
       ticker: React.findDOMNode(this.refs.companyTicker).value,
     }
 
+    $('input:text').val('');
+    $("input").blur();
+
     var newCompanies = this.state.companies.slice()
 
     var alreadyThere = false;
@@ -57,7 +60,6 @@ var AllCompanies = React.createClass({
         data: {company: company},
         success: function (company) {
           newCompanies.unshift(company[0])
-          $('input:text').val('');
           that.setState({ companies: newCompanies })
         }
       });
@@ -75,13 +77,18 @@ var AllCompanies = React.createClass({
       }
     }
 
+    var divClass = ".".concat(company.name);
+
     $.ajax({
       url: 'companies/' + company.id,
       method: "DELETE",
       dataType: "json",
       success: function (company) {
-        newCompanies.splice(spliceIdx, 1);
-        that.setState({ companies: newCompanies });
+        $(divClass).slideUp(1000)
+        setTimeout(function() {
+            newCompanies.splice(spliceIdx, 1);
+            that.setState({ companies: newCompanies });
+        }, 1000);
       }
     });
   },
@@ -100,8 +107,8 @@ var AllCompanies = React.createClass({
     if (this.state.companies.length > 0) {
       toRender = (<div>
                     {this.state.companies.map(function (company) {
-                        return (<div>
-                                  <Company company={company} />
+                        return (<div key={company.name} className={"company " + company.name}>
+                                  <Company key={company.id} company={company} />
                                   <button onClick={that.deleteCompany.bind(null, company)} >Delete</button>
                                 </div>
                                 );
@@ -113,7 +120,15 @@ var AllCompanies = React.createClass({
       toRender = (<div>Add Some Companies</div>);
     }
 
-    return (<div>
+    setTimeout(function() {
+      $('.company-page').addClass('loaded');
+    }, 200);
+
+    setTimeout(function() {
+      $('.company').addClass('loaded');
+    }, 200);
+
+    return (<div className="company-page">
               {companyForm}
               {toRender}
             </div>

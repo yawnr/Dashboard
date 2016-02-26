@@ -21,8 +21,8 @@ var Company = React.createClass({
                 <td>{"EBITDA"}</td>
               </tr>
               <tr>
-                <td>{co.quote.DaysLow}</td>
                 <td>{co.quote.DaysHigh}</td>
+                <td>{co.quote.DaysLow}</td>
                 <td>{co.quote.MarketCapitalization}</td>
                 <td>{co.quote.EBITDA}</td>
               </tr>
