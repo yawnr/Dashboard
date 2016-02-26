@@ -1,8 +1,5 @@
 class CompaniesController < ApplicationController
 
-  require 'open-uri'
-  require 'nokogiri'
-
   def index
     if current_user
       @companies = current_user.companies.order(created_at: :desc)
@@ -28,10 +25,10 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def update
+  def destroy
     company = Company.find(params[:id])
-    company.update!(company_params)
-    render 'show'
+    company.destroy!
+    render json: company
   end
 
   private
