@@ -23,8 +23,8 @@ var Company = React.createClass({
                 <td>{"EBITDA"}</td>
               </tr>
               <tr>
-                <td>{co.quote.Change}</td>
-                <td>{co.quote.PercentChange}</td>
+                <td className={"move " + "move" + co.quote.Change.substring(0,1)}>{co.quote.Change}</td>
+                <td className={"move " + "move" + co.quote.Change.substring(0,1)}>{co.quote.PercentChange}</td>
                 <td>{co.quote.DaysHigh}</td>
                 <td>{co.quote.DaysLow}</td>
                 <td>{co.quote.MarketCapitalization}</td>
