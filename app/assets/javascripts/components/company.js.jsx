@@ -37,7 +37,26 @@ var Company = React.createClass({
         </div>
 
         <div className="filings-container">
-          Filings go here
+          <table>
+            <thead>
+              <tr>
+                <td>{"Date"}</td>
+                <td>{"Title"}</td>
+                <td>{"Direct Link"}</td>
+              </tr>
+            </thead>
+            <tbody>
+            {co.filings.map(function (filing) {
+              return(
+                <tr>
+                <td>{filing.date}</td>
+                <td>{filing.title}</td>
+                <td><a href={filing.link}>{"Link"}</a></td>
+                </tr>
+              );
+            })}
+            </tbody>
+          </table>
         </div>
 
       </div>

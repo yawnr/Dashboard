@@ -18,9 +18,16 @@ class Company < ActiveRecord::Base
       company_hash['oneDayChart'] = "http://ichart.finance.yahoo.com/b?s=#{company.ticker.upcase}"
       company_hash['fiveDayChart'] = "http://ichart.finance.yahoo.com/w?s=#{company.ticker.upcase}"
       company_hash['oneMonthChart'] = "http://ichart.finance.yahoo.com/c/1m/#{company.ticker.upcase}"
+      sec_company = SecQuery::Entity.find(company.ticker.downcase)
+      filings = sec_company.filings[0..4]
+      filings_data = []
+      filings.each do |filing|
+        filings_data.push({date: filing.date, title: filing.title, link: filing.link})
+      end
+      company_hash['filings'] = filings_data
 
       # company_hash['sec_filings'] = SecQuery::Entity.find(company.ticker.upcase, :relationships=> true, :transactions=> {:start=> 0, :count=>20, :limit=> 20}, :filings=>{:start=> 0, :count=> 20, :limit=> 20})
-      sec_url = "http://www.sec.gov/cgi-bin/browse-edgar?CIK=#{company.ticker.downcase}&owner=exclude&action=getcompany"
+      # sec_url = "http://www.sec.gov/cgi-bin/browse-edgar?CIK=#{company.ticker.downcase}&owner=exclude&action=getcompany"
       # sec_data = Nokogiri::HTML(open(sec_url))
       # data_url = "http://query.yahooapis.com/v1/public/yql?q=select%20%2a%20from%20yahoo.finance.quotes%20where%20symbol%20in%20%28%22#{company.ticker.upcase}%22%29&env=store://datatables.org/alltableswithkeys"
       # financial_data = Nokogiri::HTML(open(data_url))
@@ -38,18 +45,10 @@ class Company < ActiveRecord::Base
       json_response.each_with_index do |company_hash, idx|
         company_hash['quote'] = financial_data[idx] if company_hash[:ticker].upcase == financial_data[idx]['symbol'].upcase
       end
-      
+
     end
 
     json_response
-
-    # tickers = []
-    #
-    # @companies.each do |company|
-    # end
-    #
-    # ticker_string = tickers.join(",")
-    # @json_response = Company.build_json(@companies)
 
   end
 
