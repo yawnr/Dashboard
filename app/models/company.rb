@@ -19,11 +19,19 @@ class Company < ActiveRecord::Base
       company_hash['fiveDayChart'] = "http://ichart.finance.yahoo.com/w?s=#{company.ticker.upcase}"
       company_hash['oneMonthChart'] = "http://ichart.finance.yahoo.com/c/1m/#{company.ticker.upcase}"
       sec_company = SecQuery::Entity.find(company.ticker.downcase)
-      filings = sec_company.filings[0..4]
       filings_data = []
-      filings.each do |filing|
-        filings_data.push({date: filing.date, title: filing.title, link: filing.link})
+      if sec_company
+        if sec_company.filings.length >= 5
+          filings = sec_company.filings[0..4]
+        else
+          filings = sec_company.filings
+        end
+
+        filings.each do |filing|
+          filings_data.push({date: filing.date, title: filing.title, link: filing.link})
+        end
       end
+
       company_hash['filings'] = filings_data
 
       json_response.push(company_hash)
