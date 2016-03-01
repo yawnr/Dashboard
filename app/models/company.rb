@@ -18,21 +18,28 @@ class Company < ActiveRecord::Base
       company_hash['oneDayChart'] = "http://ichart.finance.yahoo.com/b?s=#{company.ticker.upcase}"
       company_hash['fiveDayChart'] = "http://ichart.finance.yahoo.com/w?s=#{company.ticker.upcase}"
       company_hash['oneMonthChart'] = "http://ichart.finance.yahoo.com/c/1m/#{company.ticker.upcase}"
-      sec_company = SecQuery::Entity.find(company.ticker.downcase)
       filings_data = []
-      if sec_company
-        if sec_company.filings.length >= 5
-          filings = sec_company.filings[0..4]
-        else
-          filings = sec_company.filings
+
+      begin
+        sec_company = SecQuery::Entity.find(company.ticker.downcase)
+
+        if sec_company
+          if sec_company.filings.length >= 5
+            filings = sec_company.filings[0..4]
+          else
+            filings = sec_company.filings
+          end
+
+          filings.each do |filing|
+            filings_data.push({date: filing.date, title: filing.title, link: filing.link})
+          end
         end
 
-        filings.each do |filing|
-          filings_data.push({date: filing.date, title: filing.title, link: filing.link})
-        end
+      rescue
+        print "No SEC Data for this company"
+      ensure
+        company_hash['filings'] = filings_data
       end
-
-      company_hash['filings'] = filings_data
 
       json_response.push(company_hash)
     end
@@ -41,7 +48,11 @@ class Company < ActiveRecord::Base
       financial_data = StockQuote::Stock.json_quote(tickers.join(', '))['quote']
       financial_data = [financial_data] if !financial_data.is_a?(Array)
       json_response.each_with_index do |company_hash, idx|
-        company_hash['quote'] = financial_data[idx] if company_hash[:ticker].upcase == financial_data[idx]['symbol'].upcase
+        begin
+          company_hash['quote'] = financial_data[idx] if company_hash[:ticker].upcase == financial_data[idx]['symbol'].upcase
+        rescue
+          company_hash['quote'] = nil
+        end
       end
 
     end

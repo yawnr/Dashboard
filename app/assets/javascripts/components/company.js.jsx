@@ -6,6 +6,10 @@ var Company = React.createClass({
 
   render: function () {
     var co = this.props.company
+    var changeDirection = "+";
+    if (co.quote.Change) {
+      changeDirection = co.quote.Change.substring(0,1);
+    }
 
     return (
       <div key={co.id} className="company-container">
@@ -23,8 +27,8 @@ var Company = React.createClass({
                 <td>{"EBITDA"}</td>
               </tr>
               <tr>
-                <td className={"move " + "move" + co.quote.Change.substring(0,1)}>{co.quote.Change}</td>
-                <td className={"move " + "move" + co.quote.Change.substring(0,1)}>{co.quote.PercentChange}</td>
+                <td className={"move " + "move" + changeDirection}>{co.quote.Change}</td>
+                <td className={"move " + "move" + changeDirection}>{co.quote.PercentChange}</td>
                 <td>{co.quote.DaysHigh}</td>
                 <td>{co.quote.DaysLow}</td>
                 <td>{co.quote.MarketCapitalization}</td>

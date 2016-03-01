@@ -51,7 +51,7 @@ var AllCompanies = React.createClass({
         break;
       }
     }
-debugger
+
     if (!alreadyThere) {
       $.ajax({
         url: 'companies',
@@ -77,7 +77,7 @@ debugger
         break;
       }
     }
-debugger
+
     var divClass = ".".concat(company.ticker);
 
     $.ajax({
