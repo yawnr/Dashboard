@@ -46,12 +46,12 @@ var AllCompanies = React.createClass({
 
     var alreadyThere = false;
     for (var i = 0; i < newCompanies.length; i++) {
-      if (newCompanies[i].ticker == company.ticker) {
+      if (newCompanies[i].ticker.toUpperCase() == company.ticker.toUpperCase()) {
         alreadyThere = true;
         break;
       }
     }
-
+debugger
     if (!alreadyThere) {
       $.ajax({
         url: 'companies',
@@ -59,6 +59,7 @@ var AllCompanies = React.createClass({
         dataType: "json",
         data: {company: company},
         success: function (company) {
+          debugger
           newCompanies.unshift(company[0])
           that.setState({ companies: newCompanies })
         }
@@ -76,15 +77,15 @@ var AllCompanies = React.createClass({
         break;
       }
     }
-
-    var divClass = ".".concat(company.name);
+debugger
+    var divClass = ".".concat(company.ticker);
 
     $.ajax({
       url: 'companies/' + company.id,
       method: "DELETE",
       dataType: "json",
       success: function (company) {
-        $(divClass).slideUp(1000)
+        $(divClass).slideUp(900);
         setTimeout(function() {
             newCompanies.splice(spliceIdx, 1);
             that.setState({ companies: newCompanies });
@@ -107,7 +108,7 @@ var AllCompanies = React.createClass({
     if (this.state.companies.length > 0) {
       toRender = (<div>
                     {this.state.companies.map(function (company) {
-                        return (<div key={company.name} className={"company " + company.name}>
+                        return (<div key={company.ticker} className={"company " + company.ticker}>
                                   <Company key={company.id} company={company} />
                                   <button className="deleteCompany" onClick={that.deleteCompany.bind(null, company)} >Delete</button>
                                 </div>
